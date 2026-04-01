@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xxd \"c:/Users/gianc/OneDrive/Área de Trabalho/geraew-ai/propostas/favicon.ico\")"
+    ]
+  }
+}
