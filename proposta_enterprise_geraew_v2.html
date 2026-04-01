@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --cream: #faf8f4;
+    --gold: #c9a14a;
+    --gold-light: #e8d28a;
+    --muted: #7a7062;
+    --border: #e2ddd5;
+    --accent-bg: #f3f0ea;
+    --green: #3a7d5e;
+    --green-light: #edf7f2;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 64px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; color: var(--ink); }
+  .logo span { color: var(--gold); }
+  .tagline { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+  .header-meta { text-align: right; font-size: 12px; color: var(--muted); line-height: 1.8; }
+  .header-meta strong { display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+
+  /* HERO */
+  .hero { margin-bottom: 52px; }
+  .badge { display: inline-block; background: var(--gold); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; line-height: 1.15; letter-spacing: -1px; color: var(--ink); margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.7; }
+
+  /* SECTION LABEL */
+  .section-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+
+  /* TRIAL BLOCK — HERO EMPHASIS */
+  .trial-block {
+    background: var(--green);
+    border-radius: 6px;
+    padding: 36px 40px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trial-block::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .trial-block .section-label { color: rgba(255,255,255,0.55); margin-bottom: 12px; }
+
+  .trial-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 28px;
+  }
+  .trial-headline em { color: #a8e6c8; font-style: italic; }
+
+  .trial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .trial-stat {
+    padding: 18px 20px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+  }
+  .trial-stat:last-child { border-right: none; }
+  .trial-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+  .trial-stat-value { font-size: 26px; font-weight: 600; color: #fff; letter-spacing: -0.5px; line-height: 1; }
+  .trial-stat-value.accent { color: #a8e6c8; }
+  .trial-stat-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  .trial-note {
+    background: rgba(0,0,0,0.15);
+    border-left: 3px solid #a8e6c8;
+    border-radius: 2px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  .trial-note strong { color: #a8e6c8; }
+
+  /* ARROW SEPARATOR */
+  .step-arrow {
+    text-align: center;
+    font-size: 22px;
+    color: var(--muted);
+    opacity: 0.35;
+    margin: 4px 0 4px;
+    line-height: 1;
+  }
+
+  /* FEATURED PLAN */
+  .featured-plan {
+    background: var(--ink);
+    border-radius: 6px;
+    padding: 40px 40px 36px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-plan::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(201,161,74,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .featured-plan .section-label { color: var(--gold-light); }
+
+  .featured-title { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; margin-bottom: 28px; }
+  .featured-title em { color: var(--gold); font-style: italic; }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .feat-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .feat-value { font-size: 24px; font-weight: 600; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
+  .feat-value.gold { color: var(--gold); }
+  .feat-value.strike { text-decoration: line-through; opacity: 0.35; font-size: 18px; }
+  .feat-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; }
+
+  .featured-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 20px 0; }
+
+  .credits-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .credit-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 16px 20px; }
+  .credit-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+  .credit-value { font-size: 20px; font-weight: 600; color: var(--gold); letter-spacing: -0.5px; }
+  .credit-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+  /* SUMMARY */
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 48px;
+  }
+  .summary-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .summary-value.strike { text-decoration: line-through; color: var(--muted); font-size: 15px; }
+  .summary-value.main { font-size: 28px; color: var(--gold); font-weight: 700; letter-spacing: -0.5px; }
+  .summary-value { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .divider-v { width: 1px; height: 40px; background: var(--border); }
+
+  /* FOOTER */
+  .footer { border-top: 1px solid var(--border); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--ink); }
+  .footer-brand span { color: var(--gold); }
+  .footer-note { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.6; }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .hero { animation: fadeUp 0.4s ease both; }
+  .trial-block { animation: fadeUp 0.4s 0.1s ease both; }
+  .featured-plan { animation: fadeUp 0.4s 0.2s ease both; }
+  .summary-row { animation: fadeUp 0.4s 0.3s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .page { padding: 32px 20px 48px; }
+
+    .header { flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .header-meta { text-align: left; }
+
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 14px; }
+
+    .trial-block { padding: 24px 20px; }
+    .trial-grid { grid-template-columns: 1fr; }
+    .trial-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .trial-stat:last-child { border-bottom: none; }
+
+    .featured-plan { padding: 28px 20px 24px; }
+    .featured-grid { grid-template-columns: 1fr; gap: 16px; }
+    .credits-row { grid-template-columns: 1fr; }
+
+    .summary-row { flex-direction: column; gap: 16px; padding: 20px; }
+    .divider-v { width: 100%; height: 1px; }
+
+    .footer { flex-direction: column; gap: 16px; }
+    .footer-note { text-align: left; }
+  }
+
+  @media (max-width: 420px) {
+    .trial-stat-value { font-size: 22px; }
+    .feat-value { font-size: 20px; }
+    .summary-value.main { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-area">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="Design sem nome (1).png" alt="Geraew" style="height: 56px; width: auto; display: block; margin-bottom: 4px; border-radius: 15%;">
+        <span style="color: #3a7d5e; font-size: 28px; font-weight: 400; letter-spacing: -0.5px;">Geraew.AI</span>
+      </div>
+      <div class="tagline">IA · Vídeos & Imagens</div>
+    </div>
+    <div class="header-meta">
+      <strong>Proposta Comercial</strong>
+      Plano Enterprise<br>
+      Abril de 2026
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Proposta Exclusiva</div>
+    <h1>Plano Enterprise<br><em>com Desconto Especial</em></h1>
+    <p>Geração de vídeos e imagens com inteligência artificial para toda a sua equipe — com créditos mensais e condição exclusiva.</p>
+  </div>
+
+  <!-- TRIAL BLOCK -->
+  <div class="trial-block">
+    <div class="section-label">1º Mês — Período de Teste</div>
+    <div class="trial-headline">Comece sem risco: teste a plataforma<br><em>com tudo incluso por muito menos</em></div>
+
+    <div class="trial-grid">
+      <div class="trial-stat">
+        <div class="trial-stat-label">Você paga</div>
+        <div class="trial-stat-value accent">R$ 410</div>
+        <div class="trial-stat-sub">no 1º mês</div>
+      </div>
+      <div class="trial-stat">
+        <div class="trial-stat-label">Equivale a</div>
+        <div class="trial-stat-value">3 acessos</div>
+        <div class="trial-stat-sub">valor proporcional</div>
+      </div>
+      <div class="trial-stat">
+        <div class="trial-stat-label">Você recebe</div>
+        <div class="trial-stat-value accent">5 acessos</div>
+        <div class="trial-stat-sub">completos</div>
+      </div>
+    </div>
+
+    <div class="trial-note">
+      💡 Você paga o equivalente a <strong>3 acessos</strong> e já libera <strong>5 usuários</strong> para explorar a plataforma livremente — sem compromisso de longo prazo no primeiro mês.
+    </div>
+  </div>
+
+  <div class="step-arrow">↓</div>
+
+  <!-- FEATURED PLAN -->
+  <div class="featured-plan">
+    <div class="section-label">A partir do 2º Mês — Plano Enterprise com Desconto</div>
+    <div class="featured-title">Condição exclusiva: <em>R$ 180 de desconto todo mês</em></div>
+
+    <div class="featured-grid">
+      <div class="feat-item">
+        <div class="feat-label">Valor Original</div>
+        <div class="feat-value strike">R$ 899</div>
+        <div class="feat-sub">por mês</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-label">Você Paga</div>
+        <div class="feat-value gold">R$ 719</div>
+        <div class="feat-sub">por mês</div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-label">Acessos</div>
+        <div class="feat-value">5</div>
+        <div class="feat-sub">usuários incluídos</div>
+      </div>
+    </div>
+
+    <div class="featured-divider"></div>
+
+    <div class="credits-row">
+      <div class="credit-box">
+        <div class="credit-label">Total de Créditos / Mês</div>
+        <div class="credit-value">150.000</div>
+        <div class="credit-sub">divididos entre os 5 acessos</div>
+      </div>
+      <div class="credit-box">
+        <div class="credit-label">Créditos por Usuário</div>
+        <div class="credit-value">30.000</div>
+        <div class="credit-sub">por acesso, por mês</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-row">
+    <div class="summary-item">
+      <div class="summary-label">Valor Cheio</div>
+      <div class="summary-value strike">R$ 899 / mês</div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="summary-item">
+      <div class="summary-label">Economia Mensal</div>
+      <div class="summary-value" style="color:#3a7d5e; font-weight:700; font-size:20px;">R$ 180 / mês</div>
+    </div>
+    <div class="divider-v"></div>
+    <div class="summary-item">
+      <div class="summary-label">Você Paga (do 2º mês)</div>
+      <div class="summary-value main">R$ 719 / mês</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <img src="Design sem nome (1).png" alt="Geraew" style="height: 56px; width: auto; display: block; margin-bottom: 4px; border-radius: 15%;">
+    <div class="footer-note">
+      Proposta válida para aprovação em abril de 2026<br>
+      Dúvidas? Entre em contato com o nosso time comercial.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
